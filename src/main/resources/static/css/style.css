@@ -8,7 +8,19 @@ body, p{
     margin: 10px 50px;
     letter-spacing: 0;
     text-shadow: 0 0 1px #29CF29;
+}
 
+a{
+    text-decoration: none;
+    color: #29CF29;
+}
+
+a:hover{
+    text-shadow: 0 0 2px #29CF29;
+}
+
+li{
+    list-style: none;
 }
 
 

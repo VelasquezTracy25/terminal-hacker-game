@@ -12,4 +12,29 @@ public class Terminal {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "terminal")
     private List<TerminalWord> words;
+
+    public Terminal(long id, List<TerminalWord> words) {
+        this.id = id;
+        this.words = words;
+    }
+
+    public Terminal() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<TerminalWord> getWords() {
+        return words;
+    }
+
+    public void setWords(List<TerminalWord> words) {
+        this.words = words;
+    }
 }

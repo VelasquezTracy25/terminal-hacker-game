@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to the Terminal</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <script th:src="@{/js/jquery-3.6.0.js}"></script>
 </head>
 <body>
 
-<div id="typed-text"></div>
+<!--<div id="typed-text"></div>-->
+
+<h1>Viewing Terminal <span th:text="${id}"></span></h1>
+
+<ul>
+    <li th:each="word : ${words}"><a href="#" th:text="${word.word}"></a></li>
+</ul>
 
 <script th:src="@{/js/script.js}"></script>
 
