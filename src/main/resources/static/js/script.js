@@ -1,13 +1,12 @@
 // set up text to print, each item in array is new line
-let aText = ["WELCOME USER", " ",
-    "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Continue? y/n"];
+let aText = ["WELCOME USER", " ", "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Press enter to continue."];
 let iSpeed = 50; // time delay of print out
 let iIndex = 0; // start printing array at this position
 let iArrLength = aText[0].length; // the length of the text array
 let iScrollAt = 20; // start scrolling up at this many lines
 
-let iTextPos = 0; // initialise text position
-let sContents = ''; // initialise contents
+let iTextPos = 0; // initialize text position
+let sContents = ''; // initialize contents
 let iRow; // initialise current row
 
 function typewriter()
@@ -31,9 +30,13 @@ function typewriter()
     } else {
         setTimeout("typewriter()", iSpeed);
     }
-
-    document.addEventListener("keydown")
 }
 
-
 typewriter();
+
+$(document).on('keypress',function(e) {
+console.log("hey")
+    if(e.which == 13) {
+        window.location.href = "/next";
+    }
+});
