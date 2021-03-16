@@ -64,13 +64,14 @@ function check() {
             //Check for likeness of words(location and match)
             likeness = 0;
             console.log("idk")
-            for (let i=0; i<correctLength; i++){
-                if(correct[i] === wordChosen[i]){
+            for (let i = 0; i < correctLength; i++) {
+                if (correct[i] === wordChosen[i]) {
                     console.log(correct[i] + " " + wordChosen[i])
                     likeness++;
-                    // break;
                 }
                 $("#likeness").html("LIKENESS=" + likeness);
+                $(this).html("&nbsp;");
+                console.log("wow")
                 attempts--;
                 console.log("Attempt #" + attempts)
             }
