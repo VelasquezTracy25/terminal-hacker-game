@@ -57,6 +57,7 @@ hoverOver();
 
 
 let attempts = ["▮", "▮", "▮"];
+let isLocked = false;
 
 //Check for matches and remove word
 function check() {
@@ -70,25 +71,27 @@ function check() {
         // Runs no matter what
         let wordClickedCopy = "<p class='closer'>>" + wordChosen + "</p>";
 
-        //Runs if wordChosen matches correct word
-        if (wordChosen === correct) {
-            $("#entry-granted").html(">Entry granted.");
-            $("#likeness").html(">LIKENESS=" + correctLength);
-            $(".attempts").html("Terminal access granted.");
-        } else { //Otherwise...
-            //Check for likeness of words(location and match)
-            likeness = 0;
-            for (let i = 0; i < correctLength; i++) {
-                if (correct[i] === wordChosen[i]) {
-                    likeness++;
+        if (isLocked == false) {
+            //Runs if wordChosen matches correct word
+            if (wordChosen === correct) {
+                $("#entry-granted").html(">Entry granted.");
+                $("#likeness").html(">LIKENESS=" + correctLength);
+                $(".attempts").html("Terminal access granted.");
+            } else { //Otherwise...
+                //Check for likeness of words(location and match)
+                likeness = 0;
+                for (let i = 0; i < correctLength; i++) {
+                    if (correct[i] === wordChosen[i]) {
+                        likeness++;
+                    }
+                    $(this).html("&nbsp;");
                 }
-                $(this).html("&nbsp;");
+                updateAttempts();
             }
-            updateAttempts();
+            let newLikeness = "<p class='closer'>>LIKENESS=" + likeness + "</p>";
+            let entryCheck = "<p class='closer'>>Entry denied.</p>";
+            $(".sidebar").prepend(wordClickedCopy, newLikeness, entryCheck);
         }
-        let newLikeness = "<p class='closer'>>LIKENESS=" + likeness + "</p>";
-        let entryCheck = "<p class='closer'>>Entry denied.</p>";
-        $(".sidebar").prepend(wordClickedCopy, newLikeness, entryCheck);
     });
 }
 
@@ -101,6 +104,7 @@ function updateAttempts() {
         $(".attempts").html("Attempts left: " + attempts.join(" "));
     } else {
         $(".attempts").html("Terminal permanently locked.");
+        isLocked = true;
     }
 }
 
