@@ -45,20 +45,35 @@ $(document).on('keypress', function (e) {
 function check() {
     let attempts = 3;
     let granted = false;
-    let likeness = 0;
+    let likeness = null;
 
     $(".word-option").click(function () {
-        let correct = $("#true").text();
+        let correct = $.trim($("#true").text());
         let correctLength = $.trim(correct).length;
-        let wordChosen = $(this).text();
-        console.log(correct);
-        console.log(wordChosen);
+        let wordChosen = $.trim($(this).text());
+
+        //Runs no matter what
         $("#word-clicked-copy").html(wordChosen);
+
+        //Runs if wordChosen matches correct word
         if (wordChosen === correct) {
-            console.log("true");
             $("#entry-granted").html("entry granted");
             $("#likeness").html("LIKENESS=" + correctLength);
-            //"You won message"
+            //"You won" message
+        } else { //Otherwise...
+            //Check for likeness of words(location and match)
+            likeness = 0;
+            console.log("idk")
+            for (let i=0; i<correctLength; i++){
+                if(correct[i] === wordChosen[i]){
+                    console.log(correct[i] + " " + wordChosen[i])
+                    likeness++;
+                    // break;
+                }
+                $("#likeness").html("LIKENESS=" + likeness);
+                attempts--;
+                console.log("Attempt #" + attempts)
+            }
         }
     });
 }
