@@ -40,13 +40,13 @@ $(document).on('keypress', function (e) {
     }
 });
 
-function hoverOver(){
+function hoverOver() {
     let blinkingCurs = "<span class='blinking'>▮</span>"
 
     $(".word-option").hover(
-        function() {
+        function () {
             $("#hover-guess").prepend($(this).text());
-        }, function() {
+        }, function () {
             $("#hover-guess").empty();
             $("#hover-guess").prepend(blinkingCurs);
         }
@@ -56,9 +56,10 @@ function hoverOver(){
 hoverOver();
 
 
+let attempts = ["▮", "▮", "▮"];
+
 //Check for matches and remove word
 function check() {
-    let attempts = 3;
     let likeness = null;
 
     $(".word-option").click(function () {
@@ -69,12 +70,11 @@ function check() {
         // Runs no matter what
         let wordClickedCopy = "<p class='closer'>>" + wordChosen + "</p>";
 
-
         //Runs if wordChosen matches correct word
         if (wordChosen === correct) {
             $("#entry-granted").html(">Entry granted.");
             $("#likeness").html(">LIKENESS=" + correctLength);
-            //"You won" message
+            $(".attempts").html("Terminal access granted.");
         } else { //Otherwise...
             //Check for likeness of words(location and match)
             likeness = 0;
@@ -83,15 +83,26 @@ function check() {
                     likeness++;
                 }
                 $(this).html("&nbsp;");
-                attempts--;
             }
-
-            let newLikeness = "<p class='closer'>>LIKENESS=" + likeness +"</p>";
-            let entryCheck = "<p class='closer'>>Entry denied.</p>";
-            $(".sidebar").prepend(wordClickedCopy, newLikeness, entryCheck);
-            console.log()
+            updateAttempts();
         }
+        let newLikeness = "<p class='closer'>>LIKENESS=" + likeness + "</p>";
+        let entryCheck = "<p class='closer'>>Entry denied.</p>";
+        $(".sidebar").prepend(wordClickedCopy, newLikeness, entryCheck);
     });
 }
 
 check();
+
+function updateAttempts() {
+    console.log("tree")
+    if (attempts.length > 1) {
+        attempts.pop();
+        $(".attempts").html("Attempts left: " + attempts.join(" "));
+    } else {
+        $(".attempts").html("Terminal permanently locked.");
+    }
+}
+
+
+
