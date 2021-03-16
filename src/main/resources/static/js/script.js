@@ -41,12 +41,14 @@ $(document).on('keypress', function (e) {
 });
 
 function hoverOver(){
-    console.log("test")
+    let blinkingCurs = "<span class='blinking'>▮</span>"
+
     $(".word-option").hover(
         function() {
-            $("#hover-guess").html($(this).text());
+            $("#hover-guess").prepend($(this).text());
         }, function() {
             $("#hover-guess").empty();
+            $("#hover-guess").prepend(blinkingCurs);
         }
     );
 }
