@@ -27,6 +27,7 @@ public class TerminalController {
     @GetMapping("/terminal/{id}")
     public String getHome(Model model, @PathVariable long id){
         model.addAttribute("terminal", terminalDao.findById(id));
+        //Returns list of terminal words
         model.addAttribute("words", wordDao.findAllByTerminalId(id));
         return "terminal";
     }

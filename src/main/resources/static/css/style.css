@@ -10,6 +10,19 @@ body, p{
     text-shadow: 0 0 1px #29CF29;
 }
 
+h1 {
+    text-align: center;
+}
+
+.mainContainer{
+    width: 90%;
+    display: flex;
+}
+
+.attempts{
+
+}
+
 a{
     text-decoration: none;
     color: #29CF29;

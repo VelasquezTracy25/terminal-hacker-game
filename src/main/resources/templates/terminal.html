@@ -10,11 +10,22 @@
 
 <!--<div id="typed-text"></div>-->
 
-<h1>Viewing Terminal <span th:text="${id}"></span></h1>
+<h1>Accessing Terminal <span th:text="${id}"></span></h1>
 
-<ul>
-    <li th:each="word : ${words}"><a href="#" th:text="${word.word}"></a></li>
-</ul>
+<p class="attempts">Attempts left: ▮ ▮ ▮</p>
+<div class="mainContainer">
+    <ul>
+        <li class="word-option" th:each="word : ${words}" th:id="${word.correct}">
+            <a href="#" th:text="${word.word}"></a>
+        </li>
+    </ul>
+    <div class="sidebar">
+        <p id="word-clicked-copy">WORD CLICKED</p>
+        <p id="entry-granted">entry denied</p>
+        <p id="likeness">LIKENESS</p>
+    </div>
+
+</div>
 
 <script th:src="@{/js/script.js}"></script>
 
