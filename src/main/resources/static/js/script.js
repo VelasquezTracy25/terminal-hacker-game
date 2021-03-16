@@ -41,14 +41,17 @@ $(document).on('keypress', function (e) {
 });
 
 function hoverOver(){
+    console.log("test")
     $(".word-option").hover(
         function() {
-            $("#hover-guess").html( $((this).val ) );
+            $("#hover-guess").html($(this).text());
         }, function() {
             $("#hover-guess").empty();
         }
     );
 }
+
+hoverOver();
 
 
 //Check for matches and remove word
@@ -63,9 +66,7 @@ function check() {
 
         // Runs no matter what
         let wordClickedCopy = "<p class='closer'>>" + wordChosen + "</p>";
-        hoverOver();
 
-        console.log(wordClickedCopy)
 
         //Runs if wordChosen matches correct word
         if (wordChosen === correct) {
