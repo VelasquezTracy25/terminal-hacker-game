@@ -29,11 +29,19 @@ a{
 }
 
 a:hover{
-    text-shadow: 0 0 2px #29CF29;
+    color:black;
+    background-color: white;
+    text-shadow: none;
+
 }
 
 li{
     list-style: none;
+}
+
+.closer{
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 

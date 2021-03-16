@@ -40,11 +40,20 @@ $(document).on('keypress', function (e) {
     }
 });
 
+function hoverOver(){
+    $(".word-option").hover(
+        function() {
+            $("#hover-guess").html( $((this).val ) );
+        }, function() {
+            $("#hover-guess").empty();
+        }
+    );
+}
+
 
 //Check for matches and remove word
 function check() {
     let attempts = 3;
-    let granted = false;
     let likeness = null;
 
     $(".word-option").click(function () {
@@ -52,29 +61,32 @@ function check() {
         let correctLength = $.trim(correct).length;
         let wordChosen = $.trim($(this).text());
 
-        //Runs no matter what
-        $("#word-clicked-copy").html(wordChosen);
+        // Runs no matter what
+        let wordClickedCopy = "<p class='closer'>>" + wordChosen + "</p>";
+        hoverOver();
+
+        console.log(wordClickedCopy)
 
         //Runs if wordChosen matches correct word
         if (wordChosen === correct) {
-            $("#entry-granted").html("entry granted");
-            $("#likeness").html("LIKENESS=" + correctLength);
+            $("#entry-granted").html(">Entry granted.");
+            $("#likeness").html(">LIKENESS=" + correctLength);
             //"You won" message
         } else { //Otherwise...
             //Check for likeness of words(location and match)
             likeness = 0;
-            console.log("idk")
             for (let i = 0; i < correctLength; i++) {
                 if (correct[i] === wordChosen[i]) {
-                    console.log(correct[i] + " " + wordChosen[i])
                     likeness++;
                 }
-                $("#likeness").html("LIKENESS=" + likeness);
                 $(this).html("&nbsp;");
-                console.log("wow")
                 attempts--;
-                console.log("Attempt #" + attempts)
             }
+
+            let newLikeness = "<p class='closer'>>LIKENESS=" + likeness +"</p>";
+            let entryCheck = "<p class='closer'>>Entry denied.</p>";
+            $(".sidebar").prepend(wordClickedCopy, newLikeness, entryCheck);
+            console.log()
         }
     });
 }
