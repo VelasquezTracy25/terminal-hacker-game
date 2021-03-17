@@ -1,6 +1,6 @@
 // // let aText = ["WELCOME USER", " ", "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Press enter to continue."];
 // let iSpeed = 1; // time delay of print out
-console.log("3000");
+console.log("2");
 
 //Enter to next page - might change
 $(document).on('keypress', function (e) {
@@ -11,7 +11,8 @@ $(document).on('keypress', function (e) {
 
 let attempts = ["▮", "▮", "▮"];
 let isLocked = false;
-let correct = $.trim($("#true").text());
+// let correct = $.trim($("#true").text());
+//correctWord;
 let symbols = ["$", "&", "+", ":", ";", "=", "\,", "\"", "?", "@", "#", "|", "'", "<", ">", ".", "^", "*", "(", ")", "%", "!", "-",];
 let usedSymbols = [];
 let codeArray = [];
@@ -35,16 +36,18 @@ function serveCode() {
 serveCode();
 
 let i = 0;
-// let codeString = codeArray.join(''); /* The text */
-console.log(codeArray)
 let speed = 50; /* The speed/duration of the effect in milliseconds */
 
 function typeWriter() {
     if (i < codeArray.length) {
-        document.getElementById("typed-text").innerHTML += "<a href='#'>" + codeArray[i] + "</a>";
-        i++;
-        setTimeout(typeWriter, speed);
+        if (newWordsList.includes(codeArray[i])) {
+            document.getElementById("typed-text").innerHTML += "<a href='#' id='word-option'>" + codeArray[i] + "</a>";
+        } else {
+            document.getElementById("typed-text").innerHTML += "<a href='#'>" + codeArray[i] + "</a>";
+        }
     }
+    i++;
+    setTimeout(typeWriter, speed);
 }
 
 typeWriter();
@@ -65,21 +68,12 @@ function hoverOver() {
 
 hoverOver();
 
-// function clickable() {
-//     for (const word of newWordsList) {
-//     if ($("div:contains(word)")){
-//      this.setAttribute("href, "#");
-//     }
-// }
-// }
-
-
 //Check for matches and remove word
 function check() {
     let likeness = null;
 
     $(".word-option").click(function () {
-        let correctLength = $.trim(correct).length;
+        let correctLength = $(correctWord).length;
         let wordChosen = $.trim($(this).text());
 
         // Runs no matter what
@@ -87,7 +81,7 @@ function check() {
 
         if (isLocked === false && wordChosen !== "") {
             //Runs if wordChosen matches correct word
-            if (wordChosen === correct) {
+            if (wordChosen === correctWord) {
                 $("#entry-granted").html(">Entry granted.");
                 $("#likeness").html(">LIKENESS=" + correctLength);
                 $(".attempts").html("Terminal access granted.");
@@ -95,7 +89,7 @@ function check() {
                 //Check for likeness of words(location and match)
                 likeness = 0;
                 for (let i = 0; i < correctLength; i++) {
-                    if (correct[i] === wordChosen[i]) {
+                    if (correctWord[i] === wordChosen[i]) {
                         likeness++;
                     }
                     $(this).html("&nbsp;");
