@@ -29,6 +29,9 @@ function serveCode() {
         }
         usedSymbols.push(symbols[random]);
     }
+
+    //Randomize code array again
+    codeArray = codeArray.sort(() => Math.random() - 0.5);
 }
 
 serveCode();
@@ -70,10 +73,15 @@ hoverOver();
 //Check for matches and remove word
 function check() {
     let likeness = null;
+    let correctLength = correctWord.length;
 
+
+    let replacement = "";
+    for (let i = 1; i <= correctLength; i++) {
+        replacement += ".";
+    }
 
     $(document).on('click', '.word-option', function () {
-
         let correctLength = correctWord.length;
         let wordChosen = $.trim($(this).text());
 
@@ -83,24 +91,33 @@ function check() {
         if (isLocked === false && wordChosen !== "") {
             //Runs if wordChosen matches correct word
             if (wordChosen === correctWord) {
+
+                //Choose if keeping or deleting
                 $("#entry-granted").html(">Entry granted.");
+                console.log("entry granted")
                 $("#likeness").html(">LIKENESS=" + correctLength);
+                console.log("likeness")
                 $(".attempts").html("Terminal access granted.");
+                console.log(attempts)
                 isLocked = true;
             } else { //Otherwise...
                 //Check for likeness of words(location and match)
                 likeness = 0;
+
+                $(this).html(replacement);
                 for (let i = 0; i < correctLength; i++) {
                     if (correctWord[i] === wordChosen[i]) {
                         likeness++;
                     }
-                    $(this).html("&nbsp;");
+                    $(this).html(replacement);
                 }
                 updateAttempts();
+
+                let newLikeness = "<p class='closer'>>LIKENESS=" + likeness + "</p>";
+                let entryCheck = "<p class='closer'>>Entry denied.</p>";
+                $("#guess-details").append(wordClickedCopy, newLikeness, entryCheck);
             }
-            let newLikeness = "<p class='closer'>>LIKENESS=" + likeness + "</p>";
-            let entryCheck = "<p class='closer'>>Entry denied.</p>";
-            $("#guess-details").append(wordClickedCopy, newLikeness, entryCheck);
+
         }
     });
 }
