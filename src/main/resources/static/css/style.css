@@ -49,8 +49,14 @@ h1 {
     position: relative;
 }
 
-.sidebar{
-    position:absolute;
+#typed-text {
+    width: 50%;
+    /*overflow: auto;*/
+    display:inline;
+}
+
+.sidebar {
+    position: absolute;
     bottom: 8%;
     right: 12%
 }

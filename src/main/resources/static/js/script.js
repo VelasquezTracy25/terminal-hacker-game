@@ -1,6 +1,6 @@
 // // let aText = ["WELCOME USER", " ", "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Press enter to continue."];
 // let iSpeed = 1; // time delay of print out
-console.log("2");
+console.log("1");
 
 //Enter to next page - might change
 $(document).on('keypress', function (e) {
@@ -11,8 +11,6 @@ $(document).on('keypress', function (e) {
 
 let attempts = ["▮", "▮", "▮"];
 let isLocked = false;
-// let correct = $.trim($("#true").text());
-//correctWord;
 let symbols = ["$", "&", "+", ":", ";", "=", "\,", "\"", "?", "@", "#", "|", "'", "<", ">", ".", "^", "*", "(", ")", "%", "!", "-",];
 let usedSymbols = [];
 let codeArray = [];
@@ -41,7 +39,7 @@ let speed = 50; /* The speed/duration of the effect in milliseconds */
 function typeWriter() {
     if (i < codeArray.length) {
         if (newWordsList.includes(codeArray[i])) {
-            document.getElementById("typed-text").innerHTML += "<a href='#' id='word-option'>" + codeArray[i] + "</a>";
+            document.getElementById("typed-text").innerHTML += "<a href='#' class='word-option'>" + codeArray[i] + "</a>";
         } else {
             document.getElementById("typed-text").innerHTML += "<a href='#'>" + codeArray[i] + "</a>";
         }
@@ -56,14 +54,15 @@ typeWriter();
 function hoverOver() {
     let blinkingCurs = "<span class='blinking'>▮</span>"
 
-    $(".word-option").hover(
-        function () {
-            $("#hover-guess").prepend($(this).text());
-        }, function () {
-            $("#hover-guess").empty();
-            $("#hover-guess").prepend(blinkingCurs);
-        }
-    );
+    $(document).on('mouseenter', '.word-option', function () {
+        $("#hover-guess").prepend($(this).text());
+    });
+
+    $(document).on('mouseleave', '.word-option', function () {
+        $("#hover-guess").empty();
+        $("#hover-guess").prepend(blinkingCurs);
+    });
+
 }
 
 hoverOver();
@@ -106,7 +105,6 @@ function check() {
 check();
 
 function updateAttempts() {
-    console.log("tree")
     if (attempts.length > 1) {
         attempts.pop();
         $(".attempts").html("Attempts left: " + attempts.join(" "));
