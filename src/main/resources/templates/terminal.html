@@ -8,23 +8,32 @@
 </head>
 <body>
 
-<!--<div id="typed-text"></div>-->
+<div id="typed-text"></div>
 
 <h1>Accessing Terminal <span th:text="${id}"></span></h1>
 
 <p class="attempts">Attempts left: ▮ ▮ ▮</p>
 <div class="main-container">
-    <ul>
-        <li class="word-option" th:each="word : ${words}" th:id="${word.correct}">
-            <a href="#" th:text="${word.word}"></a>
-        </li>
-    </ul>
+<!--    <ul>-->
+<!--        <li class="word-option" th:each="word : ${words}" th:id="${word.correct}">-->
+<!--            <a href="#" th:text="${word.word}"></a>-->
+<!--        </li>-->
+<!--    </ul>-->
     <div class="sidebar">
+        <div id="guess-details"></div>
         <p class="closer" id="hover-guess"><span class="blinking">▮</span></p>
     </div>
 </div>
 
+<script th:inline="javascript">
+    let newWordsList = [];
+    /*[# th:each="word : ${words}"]*/
 
+    newWordsList.push("[(${word.name})]");
+
+    /*[/]*/
+
+</script>
 <script th:src="@{/js/script.js}"></script>
 
 

@@ -1,37 +1,6 @@
-//
-// let aText = ["WELCOME USER", " ", "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Press enter to continue."];
-// let iSpeed = 50; // time delay of print out
-// let iIndex = 0; // start printing array at this position
-// let iArrLength = aText[0].length; // the length of the text array
-// let iScrollAt = 20; // start scrolling up at this many lines
-//
-// let iTextPos = 0; // initialize text position
-// let sContents = ''; // initialize contents
-// let iRow; // initialise current row
-//
-// function typewriter() {
-//     sContents = ' ';
-//     iRow = Math.max(0, iIndex - iScrollAt);
-//     let destination = document.getElementById("typed-text");
-//
-//     while (iRow < iIndex) {
-//         sContents += aText[iRow++] + '<br />';
-//
-//     }
-//     destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "▮";
-//     if (iTextPos++ === iArrLength) {
-//         iTextPos = 0;
-//         iIndex++;
-//         if (iIndex !== aText.length) {
-//             iArrLength = aText[iIndex].length;
-//             setTimeout("typewriter()", 500);
-//         }
-//     } else {
-//         setTimeout("typewriter()", iSpeed);
-//     }
-// }
-//
-// typewriter();
+// // let aText = ["WELCOME USER", " ", "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Press enter to continue."];
+// let iSpeed = 1; // time delay of print out
+console.log("200");
 
 //Enter to next page - might change
 $(document).on('keypress', function (e) {
@@ -39,6 +8,45 @@ $(document).on('keypress', function (e) {
         window.location.href = "/next";
     }
 });
+
+let attempts = ["▮", "▮", "▮"];
+let isLocked = false;
+let correct = $.trim($("#true").text());
+let symbols = ["$", "&", "+", ":", ";", "=", ",", "\"", "?", "@", "#", "|", "'", "<", ">", ".", "^", "*", "(", ")", "%", "!", "-",];
+let usedSymbols = [] ;
+let codeArray = [];
+
+function serveCode() {
+
+    symbols = symbols.concat(newWordsList);
+
+    for (let i = 0; i < (408 - (newWordsList[1].length * 12)); i++) {
+        let random = Math.floor(Math.random() * symbols.length);
+            if (usedSymbols.includes(symbols[random]) && newWordsList.includes(symbols[random])) {
+                console.log("found dupe");
+            } else {
+                codeArray[i] = symbols[random];
+            }
+        usedSymbols.push(symbols[random]);
+    }
+}
+
+serveCode();
+
+let start = 0;
+let codeString = codeArray.join(''); /* The text */
+let speed = 50; /* The speed/duration of the effect in milliseconds */
+
+function typeWriter() {
+    if (start < codeString.length) {
+        document.getElementById("typed-text").innerHTML += codeString.charAt(start);
+        start++;
+        setTimeout(typeWriter, speed);
+    }
+}
+
+typeWriter();
+
 
 function hoverOver() {
     let blinkingCurs = "<span class='blinking'>▮</span>"
@@ -56,22 +64,18 @@ function hoverOver() {
 hoverOver();
 
 
-let attempts = ["▮", "▮", "▮"];
-let isLocked = false;
-
 //Check for matches and remove word
 function check() {
     let likeness = null;
 
     $(".word-option").click(function () {
-        let correct = $.trim($("#true").text());
         let correctLength = $.trim(correct).length;
         let wordChosen = $.trim($(this).text());
 
         // Runs no matter what
         let wordClickedCopy = "<p class='closer'>>" + wordChosen + "</p>";
 
-        if (isLocked == false) {
+        if (isLocked === false && wordChosen !== "") {
             //Runs if wordChosen matches correct word
             if (wordChosen === correct) {
                 $("#entry-granted").html(">Entry granted.");
@@ -90,7 +94,7 @@ function check() {
             }
             let newLikeness = "<p class='closer'>>LIKENESS=" + likeness + "</p>";
             let entryCheck = "<p class='closer'>>Entry denied.</p>";
-            $(".sidebar").prepend(wordClickedCopy, newLikeness, entryCheck);
+            $("#guess-details").append(wordClickedCopy, newLikeness, entryCheck);
         }
     });
 }

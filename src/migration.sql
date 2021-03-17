@@ -6,7 +6,7 @@ USE terminal;
 INSERT INTO terminals (id) VALUES (1), (2), (3), (4),(5);
 
 
-INSERT INTO words (id, length, is_correct, word, terminal_id)
+INSERT INTO words (id, length, is_correct, name, terminal_id)
 VALUES ('1', '4', '0', 'TEND', 1),
        ('2', '4', '0', 'SKID', 1),
        ('3', '4', '0', 'AGED', 1),

@@ -1,7 +1,5 @@
 package com.fallout.terminalhacker.models;
 
-import com.fallout.terminalhacker.repositories.WordRepository;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,17 +16,17 @@ public class TerminalWord {
     private Boolean isCorrect;
 
     @Column(nullable = false, length = 255)
-    private String word;
+    private String name;
 
     @ManyToOne
     @JoinColumn (name = "terminal_id")
     private Terminal terminal;
 
-    public TerminalWord(long id, Integer length, Boolean isCorrect, String word, Terminal terminal) {
+    public TerminalWord(long id, Integer length, Boolean isCorrect, String name, Terminal terminal) {
         this.id = id;
         this.length = length;
         this.isCorrect = isCorrect;
-        this.word = word;
+        this.name = name;
         this.terminal = terminal;
     }
 
@@ -60,12 +58,12 @@ public class TerminalWord {
         isCorrect = correct;
     }
 
-    public String getWord() {
-        return word;
+    public String getName() {
+        return name;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Terminal getTerminal() {
