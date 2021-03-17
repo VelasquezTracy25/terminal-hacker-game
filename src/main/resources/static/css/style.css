@@ -41,13 +41,22 @@ h1 {
     text-align: center;
 }
 
-.mainContainer {
+.main-container {
     width: 90%;
+    /*height: 90%;*/
     display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.sidebar{
+    position:absolute;
+    bottom: 8%;
+    right: 12%
 }
 
 .attempts {
-
+    text-align: center;
 }
 
 a {
