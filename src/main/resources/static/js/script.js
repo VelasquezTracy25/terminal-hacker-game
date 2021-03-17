@@ -1,6 +1,6 @@
 // // let aText = ["WELCOME USER", " ", "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Press enter to continue."];
 // let iSpeed = 1; // time delay of print out
-console.log("200");
+console.log("3000");
 
 //Enter to next page - might change
 $(document).on('keypress', function (e) {
@@ -12,8 +12,8 @@ $(document).on('keypress', function (e) {
 let attempts = ["▮", "▮", "▮"];
 let isLocked = false;
 let correct = $.trim($("#true").text());
-let symbols = ["$", "&", "+", ":", ";", "=", ",", "\"", "?", "@", "#", "|", "'", "<", ">", ".", "^", "*", "(", ")", "%", "!", "-",];
-let usedSymbols = [] ;
+let symbols = ["$", "&", "+", ":", ";", "=", "\,", "\"", "?", "@", "#", "|", "'", "<", ">", ".", "^", "*", "(", ")", "%", "!", "-",];
+let usedSymbols = [];
 let codeArray = [];
 
 function serveCode() {
@@ -22,25 +22,27 @@ function serveCode() {
 
     for (let i = 0; i < (408 - (newWordsList[1].length * 12)); i++) {
         let random = Math.floor(Math.random() * symbols.length);
-            if (usedSymbols.includes(symbols[random]) && newWordsList.includes(symbols[random])) {
-                console.log("found dupe");
-            } else {
-                codeArray[i] = symbols[random];
-            }
+        if (usedSymbols.includes(symbols[random]) && newWordsList.includes(symbols[random])) {
+            let smallRand = Math.floor(Math.random() * 8);
+            codeArray[i] = symbols[smallRand];
+        } else {
+            codeArray[i] = symbols[random];
+        }
         usedSymbols.push(symbols[random]);
     }
 }
 
 serveCode();
 
-let start = 0;
-let codeString = codeArray.join(''); /* The text */
+let i = 0;
+// let codeString = codeArray.join(''); /* The text */
+console.log(codeArray)
 let speed = 50; /* The speed/duration of the effect in milliseconds */
 
 function typeWriter() {
-    if (start < codeString.length) {
-        document.getElementById("typed-text").innerHTML += codeString.charAt(start);
-        start++;
+    if (i < codeArray.length) {
+        document.getElementById("typed-text").innerHTML += "<a href='#'>" + codeArray[i] + "</a>";
+        i++;
         setTimeout(typeWriter, speed);
     }
 }
@@ -62,6 +64,14 @@ function hoverOver() {
 }
 
 hoverOver();
+
+// function clickable() {
+//     for (const word of newWordsList) {
+//     if ($("div:contains(word)")){
+//      this.setAttribute("href, "#");
+//     }
+// }
+// }
 
 
 //Check for matches and remove word
