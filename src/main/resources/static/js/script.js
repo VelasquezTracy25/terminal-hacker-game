@@ -71,8 +71,10 @@ hoverOver();
 function check() {
     let likeness = null;
 
-    $(".word-option").click(function () {
-        let correctLength = $(correctWord).length;
+
+    $(document).on('click', '.word-option', function () {
+
+        let correctLength = correctWord.length;
         let wordChosen = $.trim($(this).text());
 
         // Runs no matter what
@@ -84,6 +86,7 @@ function check() {
                 $("#entry-granted").html(">Entry granted.");
                 $("#likeness").html(">LIKENESS=" + correctLength);
                 $(".attempts").html("Terminal access granted.");
+                isLocked = true;
             } else { //Otherwise...
                 //Check for likeness of words(location and match)
                 likeness = 0;
