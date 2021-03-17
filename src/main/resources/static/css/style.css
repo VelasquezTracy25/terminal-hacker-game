@@ -1,62 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-body, p{
+
+body {
     background-color: black;
-    font-family: 'VT323', monospace;
+    font: 10px 'VT323', monospace;
     color: #29CF29;
-    font-size:10px;
-    margin: 10px 50px;
+    /*margin: 10px 50px;*/
     letter-spacing: 0;
-    text-shadow: 0 0 1px #29CF29;
+    /*text-shadow: 0 0 1px #29CF29;*/
+    background-image: radial-gradient(
+            rgba(0, 150, 0, 0.75), black 80%
+    );
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    padding: 2rem;
+    /*color: white;*/
+    /*font: 10px Inconsolata, monospace;*/
+    text-shadow: 0 0 5px #29CF29;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px
+    );
+    pointer-events: none;
 }
 
 h1 {
     text-align: center;
 }
 
-.mainContainer{
+.mainContainer {
     width: 90%;
     display: flex;
 }
 
-.attempts{
+.attempts {
 
 }
 
-a{
+a {
     text-decoration: none;
     color: #29CF29;
 }
 
-a:hover{
-    color:black;
+a:hover {
+    color: black;
     background-color: white;
     text-shadow: none;
 
 }
 
-li{
+li {
     list-style: none;
 }
 
-.closer{
+.closer {
     margin-top: 0;
     margin-bottom: 0;
 }
 
 
 @-webkit-keyframes blinker {
-    from {opacity: 1.0;}
-    to {opacity: 0.0;}
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
 }
-.blinking{
+
+.blinking {
     margin-left: -5px;
     text-decoration: blink;
     -webkit-animation-name: blinker;
     -webkit-animation-duration: 250ms;
-    -webkit-animation-iteration-count:infinite;
-    -webkit-animation-timing-function:ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-direction: alternate;
 }
+
+
 
 
