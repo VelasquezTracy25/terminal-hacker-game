@@ -7,22 +7,15 @@
     <script th:src="@{/js/jquery-3.6.0.js}"></script>
 </head>
 <body>
-
-
-
-<h1>Accessing Terminal <span th:text="${id}"></span></h1>
-
-<p class="attempts">Attempts left: ▮ ▮ ▮</p>
-<div class="main-container">
-    <div id="typed-text"></div>
-<!--    <ul>-->
-<!--        <li class="word-option" th:each="word : ${words}" th:id="${word.correct}">-->
-<!--            <a href="#" th:text="${word.word}"></a>-->
-<!--        </li>-->
-<!--    </ul>-->
-    <div class="sidebar">
-        <div id="guess-details"></div>
-        <p class="closer" id="hover-guess"><span class="blinking">▮</span></p>
+<div class="content">
+    <h1>Accessing Terminal <span th:text="${id}"></span></h1>
+    <p class="attempts">Attempts left: ▮ ▮ ▮</p>
+    <div class="main-container">
+        <div id="typed-text"></div>
+        <div class="sidebar">
+            <div id="guess-details"></div>
+            <p class="closer" id="hover-guess"><span class="blinking">▮</span></p>
+        </div>
     </div>
 </div>
 
@@ -37,7 +30,7 @@
 
     correctBool = "[(${word.correct})]";
 
-    if (correctBool == "true"){
+    if (correctBool == "true") {
         correctWord = "[(${word.name})]";
     }
     /*[/]*/

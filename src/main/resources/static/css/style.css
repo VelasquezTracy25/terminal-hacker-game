@@ -5,18 +5,11 @@ body {
     background-color: black;
     font: 10px 'VT323', monospace;
     color: #29CF29;
-    /*margin: 10px 50px;*/
     letter-spacing: 0;
-    /*text-shadow: 0 0 1px #29CF29;*/
-    background-image: radial-gradient(
-            rgba(0, 150, 0, 0.75), black 80%
-    );
-    height: 100vh;
+    background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 80%);
     margin: 0;
     overflow: hidden;
-    padding: 2rem;
-    /*color: white;*/
-    /*font: 10px Inconsolata, monospace;*/
+    padding: 2em;
     text-shadow: 0 0 5px #29CF29;
 }
 
@@ -38,12 +31,18 @@ body::after {
 }
 
 h1 {
+    font-size: 15px;
     text-align: center;
+}
+
+.content{
+    margin: 0;
+    padding: 0;
 }
 
 .main-container {
     width: 90%;
-    /*height: 90%;*/
+    heightL: 100vh;
     display: flex;
     justify-content: space-between;
     position: relative;

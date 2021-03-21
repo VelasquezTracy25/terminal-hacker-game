@@ -32,6 +32,7 @@ function serveCode() {
 
     //Randomize code array again
     codeArray = codeArray.sort(() => Math.random() - 0.5);
+
 }
 
 serveCode();
@@ -40,8 +41,12 @@ let i = 0;
 let speed = 50; /* The speed/duration of the effect in milliseconds */
 
 function typeWriter() {
+    codeArray = codeArray.toString();
+
     if (i < codeArray.length) {
-        if (newWordsList.includes(codeArray[i])) {
+        if (i % 24 === 0) {
+            document.getElementById("typed-text").innerHTML += "<br>";
+        } else if (newWordsList.includes(codeArray[i])) {
             document.getElementById("typed-text").innerHTML += "<a href='#' class='word-option'>" + codeArray[i] + "</a>";
         } else {
             document.getElementById("typed-text").innerHTML += "<a href='#'>" + codeArray[i] + "</a>";
@@ -65,7 +70,6 @@ function hoverOver() {
         $("#hover-guess").empty();
         $("#hover-guess").prepend(blinkingCurs);
     });
-
 }
 
 hoverOver();
@@ -74,8 +78,6 @@ hoverOver();
 function check() {
     let likeness = null;
     let correctLength = correctWord.length;
-
-
     let replacement = "";
     for (let i = 1; i <= correctLength; i++) {
         replacement += ".";
