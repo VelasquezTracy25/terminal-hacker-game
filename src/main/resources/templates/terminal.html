@@ -7,14 +7,14 @@
     <script th:src="@{/js/jquery-3.6.0.js}"></script>
 </head>
 <body>
-<div class="content">
+<div class="content row">
     <h1>Accessing Terminal <span th:text="${id}"></span></h1>
     <p class="attempts">Attempts left: ▮ ▮ ▮</p>
     <div class="main-container">
         <div id="typed-text"></div>
         <div class="sidebar">
             <div id="guess-details"></div>
-            <p class="closer" id="hover-guess"><span class="blinking">▮</span></p>
+            <p class="closer" id="hover-guess"></p> <!--<span class="blinking">▮</span>-->
         </div>
     </div>
 </div>

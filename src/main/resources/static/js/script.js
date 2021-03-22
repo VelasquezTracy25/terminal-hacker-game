@@ -1,25 +1,21 @@
 // // let aText = ["WELCOME USER", " ", "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Press enter to continue."];
-// let iSpeed = 1; // time delay of print out
-console.log("1");
-
 //Enter to next page - might change
-$(document).on('keypress', function (e) {
-    if (e.which == 13) {
-        window.location.href = "/next";
-    }
-});
-
+// $(document).on('keypress', function (e) {
+//     if (e.which == 13) {
+//         window.location.href = "/next";
+//     }
+// });
 let attempts = ["▮", "▮", "▮"];
 let isLocked = false;
 let symbols = ["$", "&", "+", ":", ";", "=", "\,", "\"", "?", "@", "#", "|", "'", "<", ">", ".", "^", "*", "(", ")", "%", "!", "-",];
-let usedSymbols = [];
 let codeArray = [];
+let usedSymbols = [];
 
 function serveCode() {
 
     symbols = symbols.concat(newWordsList);
 
-    for (let i = 0; i < (408 - (newWordsList[1].length * 12)); i++) {
+    for (let i = 0; i < (428 - (newWordsList[1].length * 12)); i++) {
         let random = Math.floor(Math.random() * symbols.length);
         if (usedSymbols.includes(symbols[random]) && newWordsList.includes(symbols[random])) {
             let smallRand = Math.floor(Math.random() * 8);
@@ -29,24 +25,18 @@ function serveCode() {
         }
         usedSymbols.push(symbols[random]);
     }
-
     //Randomize code array again
     codeArray = codeArray.sort(() => Math.random() - 0.5);
-
 }
 
 serveCode();
 
 let i = 0;
-let speed = 50; /* The speed/duration of the effect in milliseconds */
+let speed = 10; /* The speed/duration of the effect in milliseconds */
 
 function typeWriter() {
-    codeArray = codeArray.toString();
-
     if (i < codeArray.length) {
-        if (i % 24 === 0) {
-            document.getElementById("typed-text").innerHTML += "<br>";
-        } else if (newWordsList.includes(codeArray[i])) {
+        if (newWordsList.includes(codeArray[i])) {
             document.getElementById("typed-text").innerHTML += "<a href='#' class='word-option'>" + codeArray[i] + "</a>";
         } else {
             document.getElementById("typed-text").innerHTML += "<a href='#'>" + codeArray[i] + "</a>";
@@ -57,6 +47,7 @@ function typeWriter() {
 }
 
 typeWriter();
+
 
 
 function hoverOver() {
@@ -93,19 +84,17 @@ function check() {
         if (isLocked === false && wordChosen !== "") {
             //Runs if wordChosen matches correct word
             if (wordChosen === correctWord) {
-
                 //Choose if keeping or deleting
                 $("#entry-granted").html(">Entry granted.");
                 console.log("entry granted")
                 $("#likeness").html(">LIKENESS=" + correctLength);
                 console.log("likeness")
-                $(".attempts").html("Terminal access granted.");
+                $(".attempts").html("<span class='blinking'>Terminal access granted.</span>");
                 console.log(attempts)
                 isLocked = true;
             } else { //Otherwise...
                 //Check for likeness of words(location and match)
                 likeness = 0;
-
                 $(this).html(replacement);
                 for (let i = 0; i < correctLength; i++) {
                     if (correctWord[i] === wordChosen[i]) {

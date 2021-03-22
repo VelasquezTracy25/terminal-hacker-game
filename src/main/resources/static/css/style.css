@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-
 body {
     background-color: black;
-    font: 10px 'VT323', monospace;
+    font: 8px 'VT323', monospace;
     color: #29CF29;
     letter-spacing: 0;
     background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 80%);
-    margin: 0;
+    height: 100vh;
+    margin: 2em;
     overflow: hidden;
-    padding: 2em;
+    padding: 0 1em;
     text-shadow: 0 0 5px #29CF29;
 }
 
@@ -42,16 +42,26 @@ h1 {
 
 .main-container {
     width: 90%;
-    heightL: 100vh;
+    margin: 2em 0 2em 2em;
+    height: 78px;
     display: flex;
     justify-content: space-between;
     position: relative;
 }
 
 #typed-text {
-    width: 50%;
+    width: 40%;
     /*overflow: auto;*/
     display:inline;
+    word-break: break-all;
+    column-width: 100px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .sidebar {
@@ -73,7 +83,6 @@ a:hover {
     color: black;
     background-color: #29CF29;
     text-shadow: none;
-
 }
 
 li {
@@ -84,7 +93,6 @@ li {
     margin-top: 0;
     margin-bottom: 0;
 }
-
 
 @-webkit-keyframes blinker {
     from {
