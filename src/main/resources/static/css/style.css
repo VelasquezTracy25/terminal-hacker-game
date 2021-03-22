@@ -85,8 +85,18 @@ a:hover {
     text-shadow: none;
 }
 
+ul{
+    padding: 0;
+}
+
 li {
     list-style: none;
+    margin-left: 0;
+}
+
+.long-link{
+    width: 100%;
+    padding: 0 80% 0 0;
 }
 
 .closer {

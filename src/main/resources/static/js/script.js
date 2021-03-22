@@ -42,13 +42,11 @@ function typeWriter() {
             document.getElementById("typed-text").innerHTML += "<a href='#'>" + codeArray[i] + "</a>";
         }
     }
-    i++;
-    setTimeout(typeWriter, speed);
+i++;
+setTimeout(typeWriter, speed);
 }
 
 typeWriter();
-
-
 
 function hoverOver() {
     let blinkingCurs = "<span class='blinking'>▮</span>"

@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <script th:src="@{/js/jquery-3.6.0.js}"></script>
 </head>
-<body>
+<div class="main">
+    <p>Welcome to ROBCO Industries (TM) Termlink <br><br>
+        Select a potential password <br><br>
+        If your chosen password is incorrect, the number of letters that match the terminal's password (both letter and
+        position) will be displayed on the screen.
+        <br>
+        <br>
+        Choose Your Difficulty
+    </p>
 
-<div id="typed-text"></div>
+    <ul>
+        <li><a href="/terminal/1" class="long-link">Novice</a></li>
+        <li><a href="/terminal/2" class="long-link">Adept</a></li>
+        <li><a href="/terminal/3" class="long-link">Expert</a></li>
+        <li><a href="/terminal/4" class="long-link">Master</a></li>
+    </ul>
+</div>
 
 <script th:src="@{/js/script.js}"></script>
 
