@@ -14,7 +14,7 @@
         <div id="typed-text"></div>
         <div class="sidebar">
             <div id="guess-details"></div>
-            <p class="closer" id="hover-guess"></p> <!--<span class="blinking">▮</span>-->
+            <p class="closer" id="hover-guess"></p>
         </div>
     </div>
 </div>
@@ -25,11 +25,8 @@
     let correctBool;
 
     /*[# th:each="word : ${words}"]*/
-
     newWordsList.push("[(${word.name})]");
-
     correctBool = "[(${word.correct})]";
-
     if (correctBool == "true") {
         correctWord = "[(${word.name})]";
     }

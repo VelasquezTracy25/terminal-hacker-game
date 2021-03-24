@@ -1,18 +1,12 @@
-// // let aText = ["WELCOME USER", " ", "Please log in", "", "Choose potential passwords by cycling through options with your keyboard.", "", "The number of letters that match (both number and position) will be displayed on screen.", " ", "Press enter to continue."];
-//Enter to next page - might change
-// $(document).on('keypress', function (e) {
-//     if (e.which == 13) {
-//         window.location.href = "/next";
-//     }
-// });
 let attempts = ["▮", "▮", "▮"];
 let isLocked = false;
 let symbols = ["$", "&", "+", ":", ";", "=", "\,", "\"", "?", "@", "#", "|", "'", "<", ">", ".", "^", "*", "(", ")", "%", "!", "-",];
 let codeArray = [];
 let usedSymbols = [];
 
+//Randomly generates 428 chars + words list and serves code on front end
 function serveCode() {
-
+    //Pulls wordlist from MySQL and adds to symbols array
     symbols = symbols.concat(newWordsList);
 
     for (let i = 0; i < (428 - (newWordsList[1].length * 12)); i++) {
@@ -32,32 +26,39 @@ function serveCode() {
 serveCode();
 
 let i = 0;
-let speed = 10; /* The speed/duration of the effect in milliseconds */
+let speed = 10;
 
-function typeWriter() {
+//Code for typing effect on randomly generated characters
+function terminalTyper() {
     if (i < codeArray.length) {
         if (newWordsList.includes(codeArray[i])) {
-            document.getElementById("typed-text").innerHTML += "<a href='#' class='word-option'>" + codeArray[i] + "</a>";
+            document.getElementById("typed-text").innerHTML += "<a href='#' class='word-option char'>" + codeArray[i] + "</a>";
         } else {
-            document.getElementById("typed-text").innerHTML += "<a href='#'>" + codeArray[i] + "</a>";
+            document.getElementById("typed-text").innerHTML += "<a href='#' class='char'>" + codeArray[i] + "</a>";
         }
     }
-i++;
-setTimeout(typeWriter, speed);
+    i++;
+    setTimeout(terminalTyper, speed);
 }
 
-typeWriter();
+terminalTyper();
 
+//Adds character/word hovered over to side panel and adds typing sounds while hovering
 function hoverOver() {
     let blinkingCurs = "<span class='blinking'>▮</span>"
 
-    $(document).on('mouseenter', '.word-option', function () {
-        $("#hover-guess").prepend($(this).text());
+    $(document).on('mouseenter', '.char', function () {
+        $("#hover-guess").html(($(this).text()));
+        let num = Math.floor(Math.random() * 7);
+        console.log(num)
+        let audio = new Audio('../sounds/button-press-' + num + '.mp3');
+        audio.play();
     });
 
-    $(document).on('mouseleave', '.word-option', function () {
+    $(document).on('mouseleave', '.char', function () {
         $("#hover-guess").empty();
-        $("#hover-guess").prepend(blinkingCurs);
+        $("#hover-guess").html((blinkingCurs));
+        audio.pause();
     });
 }
 
@@ -82,15 +83,10 @@ function check() {
         if (isLocked === false && wordChosen !== "") {
             //Runs if wordChosen matches correct word
             if (wordChosen === correctWord) {
-                //Choose if keeping or deleting
-                $("#entry-granted").html(">Entry granted.");
-                console.log("entry granted")
-                $("#likeness").html(">LIKENESS=" + correctLength);
-                console.log("likeness")
-                $(".attempts").html("<span class='blinking'>Terminal access granted.</span>");
-                console.log(attempts)
+                //TODO: Maybe add score to total score and Rerun game and reset attempts
+                $(".attempts").html("<span class='blinking'>Password match. Terminal access granted.</span>");
                 isLocked = true;
-            } else { //Otherwise...
+            } else {
                 //Check for likeness of words(location and match)
                 likeness = 0;
                 $(this).html(replacement);
@@ -106,19 +102,19 @@ function check() {
                 let entryCheck = "<p class='closer'>>Entry denied.</p>";
                 $("#guess-details").append(wordClickedCopy, newLikeness, entryCheck);
             }
-
         }
     });
 }
 
 check();
 
+//When attempt is made, reduce attempts by one, after three attempts lock terminal/game
 function updateAttempts() {
     if (attempts.length > 1) {
         attempts.pop();
         $(".attempts").html("Attempts left: " + attempts.join(" "));
     } else {
-        $(".attempts").html("Terminal permanently locked.");
+        $(".attempts").html("<span class='blinking'>Terminal permanently locked.</span>");
         isLocked = true;
     }
 }
