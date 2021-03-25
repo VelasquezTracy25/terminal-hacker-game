@@ -11,15 +11,24 @@ function serveCode() {
 
     for (let i = 0; i < (428 - (newWordsList[1].length * 12)); i++) {
         let random = Math.floor(Math.random() * symbols.length);
-        if (usedSymbols.includes(symbols[random]) && newWordsList.includes(symbols[random])) {
-            let smallRand = Math.floor(Math.random() * 8);
+        let smallRand = Math.floor(Math.random() * 20);
+        //Checks for index of 0, the randomized symbol is a word and the last index of code array is also a word
+        if (codeArray[i] !== undefined && symbols[random].length > 1 && codeArray[i - 1].length > 1) {
+            //Add a random character
             codeArray[i] = symbols[smallRand];
         } else {
-            codeArray[i] = symbols[random];
+            //If the word has already been used
+            if (usedSymbols.includes(symbols[random])) {
+                //Add a random character
+                codeArray[i] = symbols[smallRand];
+            } else {
+                //Add the picked character or word
+                codeArray[i] = symbols[random];
+            }
+            usedSymbols.push(symbols[random]);
         }
-        usedSymbols.push(symbols[random]);
     }
-    //Randomize code array again
+    //Randomize code array again - so all words arent lumped at the beginning
     codeArray = codeArray.sort(() => Math.random() - 0.5);
 }
 
