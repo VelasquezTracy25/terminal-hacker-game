@@ -12,7 +12,7 @@ function serveCode() {
     for (let i = 0; i < (428 - (newWordsList[1].length * 12)); i++) {
         let random = Math.floor(Math.random() * symbols.length);
         let smallRand = Math.floor(Math.random() * 20);
-        //Checks for index of 0, the randomized symbol is a word and the last index of code array is also a word
+        //Checks for index of 0's value, the randomized symbol is a word and the last index of code array is also a word
         if (codeArray[i] !== undefined && symbols[random].length > 1 && codeArray[i - 1].length > 1) {
             //Add a random character
             codeArray[i] = symbols[smallRand];
@@ -58,16 +58,15 @@ function hoverOver() {
 
     $(document).on('mouseenter', '.char', function () {
         $("#hover-guess").html(($(this).text()));
-        let num = Math.floor(Math.random() * 7);
-        console.log(num)
-        let audio = new Audio('../sounds/button-press-' + num + '.mp3');
-        audio.play();
+        // let num = Math.floor(Math.random() * 7);
+        // let audio = new Audio('../sounds/button-press-' + num + '.mp3');
+        // audio.play();
     });
 
     $(document).on('mouseleave', '.char', function () {
         $("#hover-guess").empty();
         $("#hover-guess").html((blinkingCurs));
-        audio.pause();
+        // audio.pause();
     });
 }
 
@@ -92,7 +91,6 @@ function check() {
         if (isLocked === false && wordChosen !== "") {
             //Runs if wordChosen matches correct word
             if (wordChosen === correctWord) {
-                //TODO: Maybe add score to total score and Rerun game and reset attempts
                 $(".attempts").html("<span class='blinking'>Password match. Terminal access granted.</span>");
                 isLocked = true;
             } else {
