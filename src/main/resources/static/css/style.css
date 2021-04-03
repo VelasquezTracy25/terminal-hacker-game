@@ -66,6 +66,7 @@ h1 {
 
 .sidebar {
     position: absolute;
+    height: 78px;
     bottom: 8%;
     right: 12%
 }
@@ -124,5 +125,20 @@ li {
 }
 
 
+/* Media Queries */
+@media (max-width: 900px){
 
+}
+
+@media(max-width:719px){
+
+}
+
+@media (max-width: 600px){
+}
+
+
+@media(min-width:720px){
+
+}
 

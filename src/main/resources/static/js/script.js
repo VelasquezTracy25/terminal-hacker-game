@@ -9,7 +9,7 @@ function serveCode() {
     //Pulls wordlist from MySQL and adds to symbols array
     symbols = symbols.concat(newWordsList);
 
-    for (let i = 0; i < (428 - (newWordsList[1].length * 12)); i++) {
+    for (let i = 0; i < (282 - (newWordsList[1].length * 12)); i++) {
         let random = Math.floor(Math.random() * symbols.length);
         let smallRand = Math.floor(Math.random() * 20);
         //Checks for index of 0's value, the randomized symbol is a word and the last index of code array is also a word
@@ -77,6 +77,7 @@ function check() {
     let likeness = null;
     let correctLength = correctWord.length;
     let replacement = "";
+    //Replaces guessed word with x amount of "." - dependant on word's length
     for (let i = 1; i <= correctLength; i++) {
         replacement += ".";
     }
