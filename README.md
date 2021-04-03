@@ -12,7 +12,7 @@ If they guess the correct word before their 3 attempts are up, they are granted 
 
 ![gif displaying a successful round of the game](/src/main/resources/static/img/novice.gif)
 
-If a player uses all of their attempts before guessing the correct word, they are permanently locked out of the terminal anc have to try again.
+If a player uses all of their attempts before guessing the correct word, they are permanently locked out of the terminal and have to try again.
 
 ![gif displaying losing the game](/src/main/resources/static/img/master.gif)
 
